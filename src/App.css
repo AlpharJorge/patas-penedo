@@ -46,7 +46,7 @@
   color: #a8bdf8;
 }
 
-/* ---------- Hero ---------- */
+
 .hero {
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@
   color: #6b665f;
 }
 
-/* ---------- Catalog ---------- */
+
 .catalog {
   padding: 48px 32px;
   max-width: 1200px;
@@ -190,7 +190,7 @@
   color: #2f6b4f;
 }
 
-/* ---------- Campaigns ---------- */
+
 .campaigns {
   padding: 48px 32px;
   max-width: 1200px;
@@ -249,7 +249,7 @@
   border-radius: 999px;
 }
 
-/* ---------- How to help ---------- */
+
 .how-to-help {
   padding: 48px 32px;
   max-width: 1100px;
@@ -280,7 +280,7 @@
   margin-bottom: 8px;
 }
 
-/* ---------- Footer ---------- */
+
 .footer {
   margin-top: auto;
   background-color: #a3c0e0;
