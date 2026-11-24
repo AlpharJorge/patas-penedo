@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, Search, X } from "lucide-react";
 import AnimalCard from "./AnimalCard";
 import animalsData from "../data/animals";
-import { isDatabaseConfigured, loadAnimals, saveAdoptionRequest } from "../lib/dataStore";
+import { loadAnimals, saveAdoptionRequest } from "../lib/dataStore";
 
 const emptyForm = { name: "", email: "", phone: "", message: "" };
 
@@ -45,12 +45,12 @@ function AdoptionDialog({ animal, onClose }) {
     <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <section className="adoption-dialog" role="dialog" aria-modal="true" aria-labelledby="adoption-title">
         <button className="icon-button adoption-dialog__close" type="button" onClick={onClose} aria-label="Fechar formulário"><X size={20} /></button>
-        {status === "database" || status === "local" ? (
+        {status === "api" || status === "local" ? (
           <div className="form-success" role="status">
             <span className="form-success__icon"><Check size={25} /></span>
             <p className="eyebrow">Pedido registrado</p>
             <h2 id="adoption-title">Obrigado pelo interesse!</h2>
-            <p>{status === "database" ? "Seu pedido foi salvo. A equipe poderá entrar em contato pelos dados informados." : "Seu pedido ficou salvo neste navegador. Para receber contatos da equipe, configure o banco de dados do projeto."}</p>
+            <p>{status === "api" ? "Seu pedido foi salvo. A equipe poderá entrar em contato pelos dados informados." : "A API MySQL não estava disponível. Seu pedido ficou salvo somente neste navegador."}</p>
             <button className="button button--primary" type="button" onClick={onClose}>Concluir <ArrowRight size={17} /></button>
           </div>
         ) : (
@@ -120,7 +120,7 @@ function AnimalCatalog({ preview = false }) {
           <label className="select-field"><span>Situação</span><select value={status} onChange={(event) => setStatus(event.target.value)}><option>Disponível</option><option>Todos</option><option>Em processo</option><option>Adotado</option></select></label>
         </div>
       )}
-      {dataWarning && isDatabaseConfigured() && <p className="data-notice" role="status">Não foi possível acessar o banco. Exibindo os animais de demonstração.</p>}
+      {dataWarning && <p className="data-notice" role="status">A API MySQL não está disponível. Exibindo os animais de demonstração.</p>}
       {shownAnimals.length ? (
         <div className="catalog__grid">
           {shownAnimals.map((animal) => <AnimalCard key={animal.id} animal={animal} onAdopt={setSelectedAnimal} />)}

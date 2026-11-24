@@ -8,7 +8,7 @@ const animals = [
     temperament: "Brincalhão e sociável com outros cães",
     status: "Disponível",
     story:
-      "Resgatado na Ponta Verde após ficar preso em um terreno baldio. Hoje está saudável e adora correr no quintal.",
+      "Resgatado em Penedo após ficar preso em um terreno baldio. Hoje está saudável e adora correr no quintal.",
     photo: "https://i0.statig.com.br/bancodeimagens/2f/ym/i8/2fymi85z5vo5pcl5rsnsr3xgi.jpg",
   },
   {
@@ -20,7 +20,7 @@ const animals = [
     temperament: "Independente, gosta de carinho em horas certas",
     status: "Adotado",
     story:
-      "Encontrada ainda filhote no Jaraguá. Foi criada com mamadeira pelos voluntários e é ótima com crianças.",
+      "Encontrada ainda filhote em Penedo. Foi criada com mamadeira pelos voluntários e é ótima com crianças.",
     photo: "https://static.wixstatic.com/media/a47bbc_9aa1d751bd464bafb78981010cc9c0ab~mv2.jpeg/v1/fill/w_648,h_636,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Loiro-gato-para-adocao_PatinhasCarentes_.jpeg",
   },
   {
@@ -44,7 +44,7 @@ const animals = [
     temperament: "Curiosa e muito ativa",
     status: "Disponível",
     story:
-      "Resgatada de uma colônia de rua no Pontal da Barra. Ainda está em tratamento, mas já pode ser visitada.",
+      "Resgatada de uma colônia de rua em Penedo. Ainda está em tratamento, mas já pode ser visitada.",
     photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHvgOZRrl2s0NI6WzEZ5GS7xZddd07QFhk4dviiUaRrw&s=10",
   },
   {
@@ -65,10 +65,10 @@ const animals = [
     species: "Gato",
     age: "6 meses",
     size: "Pequeno",
-    temperament: "Tranquila, prefere ambientes silenciosos",
+    temperament: "Tranquilo, prefere ambientes silenciosos",
     status: "Disponível",
     story:
-      "Entregue voluntariamente por uma família que não podia mais cuidar dela. Já está pronta para um novo lar.",
+      "Entregue voluntariamente por uma família que não podia mais cuidar dele. Já está pronto para um novo lar.",
     photo: "https://catland.org.br/wp-content/uploads/2023/04/foto-1.png",
   },
 ];

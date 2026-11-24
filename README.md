@@ -2,60 +2,75 @@
 
 Site acadêmico de adoção responsável de animais, desenvolvido em React para a disciplina Programação Web I (UFAL).
 
-## O que o site oferece
+## Funcionalidades
 
 - Páginas de início, sobre, adoção, campanhas, como ajudar e contato.
 - Catálogo com busca por texto e filtros por espécie e situação.
-- Formulário para registrar interesse em conhecer um animal.
-- Links para campanhas solidárias.
-- Layout responsivo, ícones Lucide e mensagens condicionais conforme o resultado das ações.
-- Integração opcional com Supabase. Sem credenciais, o catálogo usa os dados de demonstração e os pedidos de interesse ficam no armazenamento local do navegador.
+- Formulário de interesse em adoção.
+- API Express para consultar animais e registrar pedidos.
+- Banco MySQL com dados de demonstração.
+- Axios no React para fazer as requisições à API.
+- Dados de demonstração e armazenamento local como alternativa quando a API não estiver disponível.
 
 ## Tecnologias
 
-- React 19, Vite e JavaScript.
-- CSS responsivo.
-- [Lucide React](https://lucide.dev/guide/packages/lucide-react) para ícones.
-- Supabase REST API para o banco de dados (opcional).
+- React, Vite e JavaScript.
+- Axios para chamadas HTTP do site à API.
+- Node.js e Express para disponibilizar a API REST.
+- MySQL, acessado pelo servidor Node usando `mysql2`.
+- CSS responsivo e Lucide React.
 
-## Executar localmente
+## Executar no computador
 
-Requisitos: Node.js 20.19+ ou 22.12+.
+Requisitos: Node.js 20.19+ ou 22.12+, MySQL Server e, opcionalmente, MySQL Workbench.
 
-```bash
-npm install
-npm run dev
-```
+1. Instale as dependências do projeto:
 
-Abra o endereço indicado pelo Vite, normalmente `http://localhost:5173`.
+   ```bash
+   npm install
+   ```
 
-Para gerar os arquivos de publicação:
+2. Crie as tabelas e carregue os animais de demonstração. No MySQL Workbench, abra `server/schema.sql` e execute o script. Ele cria o banco `patas_penedo`, as tabelas `animals` e `adoption_requests` e seis registros de exemplo.
+
+3. Copie `server/.env.example` para `server/.env` e preencha `DB_USER` e `DB_PASSWORD` com as credenciais do seu MySQL. A senha fica apenas no servidor e não deve ser enviada ao navegador nem publicada no Git.
+
+4. Copie `.env.example` para `.env.local`. Para executar localmente, mantenha `VITE_API_URL=http://localhost:3001/api`.
+
+5. Abra um terminal na pasta do projeto e inicie a API:
+
+   ```bash
+   npm run dev:api
+   ```
+
+6. Abra um segundo terminal na mesma pasta e inicie o React:
+
+   ```bash
+   npm run dev
+   ```
+
+7. Acesse o endereço mostrado pelo Vite, normalmente `http://localhost:5173`.
+
+A API oferece `GET /api/animals`, `POST /api/adoption-requests` e `GET /api/health`. O formulário grava os pedidos no MySQL quando a API e o banco estão disponíveis. Se a API estiver parada, o site usa os dados de demonstração e guarda o pedido apenas no navegador.
+
+Para gerar os arquivos de produção do frontend:
 
 ```bash
 npm run build
 ```
 
-## Configurar o banco de dados Supabase
-
-1. Crie um projeto no Supabase.
-2. No SQL Editor do Supabase, execute [`supabase/schema.sql`](supabase/schema.sql).
-3. Copie `.env.example` para `.env.local` e informe a URL do projeto e a chave **anon/public** nas variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
-4. Cadastre animais na tabela `animals` pelo Table Editor do Supabase.
-5. Reinicie o servidor Vite. Os animais serão lidos do banco e os formulários de interesse gravarão em `adoption_requests`.
-
-O esquema mantém os dados dos animais disponíveis para leitura pública e aceita novos pedidos de adoção sem permitir leitura pública desses pedidos. As credenciais não devem ser incluídas no Git. Em produção, configure limites contra spam e revise as políticas de acesso conforme a operação da ONG.
-
-## Estrutura
+## Estrutura principal
 
 ```text
 src/
-├── components/   # Navegação, páginas e componentes reutilizáveis
-├── data/         # Dados usados no modo de demonstração
-├── lib/          # Acesso ao Supabase e persistência local de contingência
-├── App.jsx       # Rotas por hash e composição das páginas
-└── App.css       # Estilos de componentes e responsividade
-supabase/
-└── schema.sql    # Tabelas e políticas de acesso do banco
+├── components/       # Páginas e componentes React
+├── data/             # Animais de demonstração
+├── lib/api.js        # Cliente Axios
+└── lib/dataStore.js  # Consultas à API e fallback local
+server/
+├── db.js             # Pool de conexões MySQL
+├── index.js          # API Express
+├── schema.sql        # Banco, tabelas e dados de exemplo
+└── .env.example      # Modelo de configuração local do servidor
 ```
 
 ## Autoria
