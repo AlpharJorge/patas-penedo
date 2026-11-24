@@ -1,92 +1,63 @@
-# 🐾 Patas de Penedo
+# Patas de Penedo
 
-Projeto acadêmico da disciplina **Programação Web I** (UFAL), sob orientação do professor **Gustavo Miranda**.
+Site acadêmico de adoção responsável de animais, desenvolvido em React para a disciplina Programação Web I (UFAL).
 
-## 📖 Sobre o projeto
+## O que o site oferece
 
-O **Patas de Penedo** é um site desenvolvido em React para uma ONG fictícia de resgate e adoção de animais na cidade de Penedo/AL.
+- Páginas de início, sobre, adoção, campanhas, como ajudar e contato.
+- Catálogo com busca por texto e filtros por espécie e situação.
+- Formulário para registrar interesse em conhecer um animal.
+- Links para campanhas solidárias.
+- Layout responsivo, ícones Lucide e mensagens condicionais conforme o resultado das ações.
+- Integração opcional com Supabase. Sem credenciais, o catálogo usa os dados de demonstração e os pedidos de interesse ficam no armazenamento local do navegador.
 
-### O problema
+## Tecnologias
 
-A ONG é mantida por voluntários que resgatam cães e gatos abandonados, mas não possui um site — toda a divulgação de animais para adoção, campanhas de doação e informações sobre a instituição é feita de forma dispersa em posts de redes sociais e grupos de WhatsApp, que se perdem rapidamente e dificultam tanto as adoções quanto as doações.
+- React 19, Vite e JavaScript.
+- CSS responsivo.
+- [Lucide React](https://lucide.dev/guide/packages/lucide-react) para ícones.
+- Supabase REST API para o banco de dados (opcional).
 
-### A solução
+## Executar localmente
 
-Um site que centraliza, em um só lugar, sempre atualizado e organizado:
+Requisitos: Node.js 20.19+ ou 22.12+.
 
-- Um catálogo com os animais disponíveis para adoção
-- Campanhas de apadrinhamento e doação
-- Informações sobre como ajudar a ONG (voluntariado, doações, divulgação)
-- Dados de contato
-
-## 🧩 Funcionalidades
-
-- **Catálogo de animais** — cards com foto, espécie, idade, porte, temperamento e história de resgate de cada animal
-- **Campanhas de apadrinhamento** — cards com campanhas ativas, cada um levando a um link próprio de contato
-- **Seção "Como ajudar"** — formas de contribuir com a ONG além da adoção
-- **Navegação por âncoras** — menu do topo leva direto a cada seção da página
-
-## 🛠️ Tecnologias utilizadas
-
-- [React](https://react.dev/) (via [Vite](https://vitejs.dev/))
-- JavaScript (JSX)
-- CSS3 (Flexbox, responsividade)
-
-## 📁 Estrutura do projeto
-
+```bash
+npm install
+npm run dev
 ```
+
+Abra o endereço indicado pelo Vite, normalmente `http://localhost:5173`.
+
+Para gerar os arquivos de publicação:
+
+```bash
+npm run build
+```
+
+## Configurar o banco de dados Supabase
+
+1. Crie um projeto no Supabase.
+2. No SQL Editor do Supabase, execute [`supabase/schema.sql`](supabase/schema.sql).
+3. Copie `.env.example` para `.env.local` e informe a URL do projeto e a chave **anon/public** nas variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
+4. Cadastre animais na tabela `animals` pelo Table Editor do Supabase.
+5. Reinicie o servidor Vite. Os animais serão lidos do banco e os formulários de interesse gravarão em `adoption_requests`.
+
+O esquema mantém os dados dos animais disponíveis para leitura pública e aceita novos pedidos de adoção sem permitir leitura pública desses pedidos. As credenciais não devem ser incluídas no Git. Em produção, configure limites contra spam e revise as políticas de acesso conforme a operação da ONG.
+
+## Estrutura
+
+```text
 src/
-├── components/        # Componentes de cada seção do site
-│   ├── Header.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── AnimalCard.jsx
-│   ├── AnimalCatalog.jsx
-│   ├── CampaignCard.jsx
-│   ├── Campaigns.jsx
-│   ├── HowToHelp.jsx
-│   └── Footer.jsx
-├── data/               # Dados mockados (simulam dados de um servidor)
-│   ├── animals.js
-│   └── campaigns.js
-├── App.jsx              # Componente raiz, monta todas as seções
-├── App.css               # Estilos das seções (layout, flexbox)
-├── index.css              # Estilos globais (tipografia, reset)
-└── main.jsx                # Ponto de entrada, conecta o React ao HTML
+├── components/   # Navegação, páginas e componentes reutilizáveis
+├── data/         # Dados usados no modo de demonstração
+├── lib/          # Acesso ao Supabase e persistência local de contingência
+├── App.jsx       # Rotas por hash e composição das páginas
+└── App.css       # Estilos de componentes e responsividade
+supabase/
+└── schema.sql    # Tabelas e políticas de acesso do banco
 ```
 
-## 🚀 Como executar o projeto
+## Autoria
 
-### Pré-requisitos
-
-- [Node.js](https://nodejs.org/) instalado (versão 16 ou superior)
-
-### Passo a passo
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/AlpharJorge/patas-penedo.git
-   ```
-
-2. Entre na pasta do projeto:
-   ```bash
-   cd patas-penedo
-   ```
-
-3. Instale as dependências:
-   ```bash
-   npm install
-   ```
-
-4. Inicie o servidor de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-
-5. O terminal vai mostrar um endereço (geralmente `http://localhost:5173`) — abra ele no navegador.
-
-
-
-## 👥 Autoria
-
-Projeto desenvolvido por Jorge Victor, para a disciplina de Programação Web I — Universidade Federal de Alagoas (UFAL).
+Projeto desenvolvido por Jorge Victor para Programação Web I — Universidade Federal de Alagoas (UFAL).

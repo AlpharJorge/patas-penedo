@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -7,18 +8,44 @@ import HowToHelp from "./components/HowToHelp";
 import Footer from "./components/Footer";
 import "./App.css";
 
+function readRoute() {
+  return window.location.hash.replace(/^#/, "") || "/";
+}
+
 function App() {
-  return (
-    <div className="app">
-      <Header />
-      <main>
+  const [route, setRoute] = useState(readRoute);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setRoute(readRoute());
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    window.addEventListener("hashchange", handleRouteChange);
+    return () => window.removeEventListener("hashchange", handleRouteChange);
+  }, []);
+
+  const page = {
+    "/": (
+      <>
         <Hero />
         <About />
-        <AnimalCatalog />
-        <Campaigns />
-        <HowToHelp />
+      </>
+    ),
+    "/sobre": <About />,
+    "/adocao": <AnimalCatalog />,
+    "/campanhas": <Campaigns />,
+    "/ajudar": <HowToHelp />,
+    "/contato": <Footer contactPage />,
+  }[route] ?? <Hero />;
+
+  return (
+    <div className="app">
+      <Header activeRoute={route} />
+      <main key={route} className="page-content">
+        {page}
       </main>
-      <Footer />
+      {route !== "/contato" && <Footer />}
     </div>
   );
 }

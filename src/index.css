@@ -1,42 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap");
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "Nunito", system-ui, sans-serif;
-  color: #33302c;
-  background-color: #fdf8f3;
-  line-height: 1.5;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Nunito", system-ui, sans-serif;
-  font-weight: 800;
-  color: #86b3dd;
-  margin: 0 0 0.5em;
-}
-
-p {
-  margin: 0 0 1em;
-  color: #33302c;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-a {
-  color: #86b3dd;
-}
+* { box-sizing: border-box; }
+html { min-width: 320px; scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; color: #25342d; background: #faf8f2; font-family: "DM Sans", "Nunito", system-ui, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+img { display: block; max-width: 100%; }
+::selection { color: #fff; background: #66806b; }
+:focus-visible { outline: 3px solid #eaa06a; outline-offset: 3px; }
