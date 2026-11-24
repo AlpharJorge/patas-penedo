@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Check, Search, X } from "lucide-react";
 import AnimalCard from "./AnimalCard";
 import animalsData from "../data/animals";
@@ -94,12 +94,12 @@ function AnimalCatalog({ preview = false }) {
     return () => { active = false; };
   }, []);
 
-  const visibleAnimals = useMemo(() => animals.filter((animal) => {
+  const visibleAnimals = animals.filter((animal) => {
     const matchesSpecies = species === "Todos" || animal.species === species;
     const matchesStatus = status === "Todos" || animal.status === status;
     const text = `${animal.name} ${animal.species} ${animal.temperament} ${animal.story}`.toLocaleLowerCase("pt-BR");
     return matchesSpecies && matchesStatus && text.includes(query.trim().toLocaleLowerCase("pt-BR"));
-  }), [animals, query, species, status]);
+  });
 
   const shownAnimals = preview ? visibleAnimals.slice(0, 3) : visibleAnimals;
 
@@ -134,3 +134,4 @@ function AnimalCatalog({ preview = false }) {
 }
 
 export default AnimalCatalog;
+
