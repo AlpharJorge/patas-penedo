@@ -17,7 +17,6 @@ function Hero() {
         <div className="hero__note"><span className="hero__note-mark">♥</span><span>Um novo começo pode começar com você.</span></div>
       </div>
       <div className="hero__visual" role="img" aria-label="Ilustração de um cão e um gato juntos">
-        <div className="hero__sun" />
         <div className="hero__photo-frame">
           <img
             src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1000&q=85"
@@ -25,8 +24,6 @@ function Hero() {
           />
           <div className="hero__photo-caption"><span>🐾</span><span>Amor que encontra um lar</span></div>
         </div>
-        <span className="hero__spark hero__spark--one">✳</span>
-        <span className="hero__spark hero__spark--two">✳</span>
       </div>
     </section>
   );

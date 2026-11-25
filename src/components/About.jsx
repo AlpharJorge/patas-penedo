@@ -1,10 +1,10 @@
-import { ArrowRight, Heart, House, UsersRound } from "lucide-react";
+import { ArrowRight, House, UsersRound } from "lucide-react";
 
 function About() {
   return (
     <section id="sobre" className="about section-shell">
       <div className="about__visual" aria-hidden="true">
-        <div className="about__shape"><span className="about__paw">🐾</span><span className="about__heart"><Heart size={28} fill="currentColor" /></span></div>
+        <div className="about__shape"><span className="about__paw">🐾</span></div>
         <div className="about__caption"><strong>Cuidado de perto.</strong><span>Uma história de cada vez.</span></div>
       </div>
       <div className="about__text">
