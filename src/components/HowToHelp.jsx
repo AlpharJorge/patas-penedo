@@ -16,9 +16,8 @@ function HowToHelp() {
         <p className="section-heading__copy">Cada gesto ajuda a criar um caminho mais seguro até um novo lar.</p>
       </div>
       <div className="how-to-help__grid">
-        {ways.map(({ icon: Icon, title, text }, index) => (
+        {ways.map(({ icon: Icon, title, text }) => (
           <article className="help-item" key={title}>
-            <span className="help-item__number">0{index + 1}</span>
             <span className="help-item__icon"><Icon size={24} aria-hidden="true" /></span>
             <h3>{title}</h3><p>{text}</p>
           </article>

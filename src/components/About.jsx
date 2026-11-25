@@ -5,7 +5,7 @@ function About() {
     <section id="sobre" className="about section-shell">
       <div className="about__visual" aria-hidden="true">
         <div className="about__shape"><span className="about__paw">🐾</span></div>
-        <div className="about__caption"><strong>Cuidado de perto.</strong><span>Uma história de cada vez.</span></div>
+        <p className="about__caption">Cuidado de perto. Uma história de cada vez.</p>
       </div>
       <div className="about__text">
         <p className="eyebrow">Quem somos</p>

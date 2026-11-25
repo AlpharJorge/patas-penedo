@@ -270,10 +270,11 @@
 }
 
 .about__visual {
-  position: relative;
   min-height: 380px;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  align-content: center;
+  gap: 14px;
 }
 
 .about__shape {
@@ -293,25 +294,10 @@
 }
 
 .about__caption {
-  position: absolute;
-  z-index: 2;
-  left: 16px;
-  bottom: 16px;
-  padding: 15px 21px;
-  display: grid;
-  gap: 2px;
-  border-radius: 10px;
-  background: #fff;
-}
-
-.about__caption strong {
-  color: var(--green);
-  font-size: .9rem;
-}
-
-.about__caption span {
+  margin: 0;
   color: var(--muted);
-  font-size: .75rem;
+  font-size: .85rem;
+  text-align: center;
 }
 
 .about__text h2, .section-heading h2, .contact-intro h1 {
@@ -371,10 +357,6 @@
   font-size: .88rem;
   font-weight: 900;
   text-decoration: none;
-}
-
-.text-link:hover {
-  gap: 12px;
 }
 
 .catalog, .campaigns, .how-to-help {
@@ -729,21 +711,11 @@
 }
 
 .help-item {
-  position: relative;
   min-height: 230px;
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: 20px;
   background: #fff;
-}
-
-.help-item__number {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: #c2c9bd;
-  font-size: .68rem;
-  font-weight: 900;
 }
 
 .help-item__icon {
@@ -1172,11 +1144,6 @@
 
   .about__paw {
     font-size: 7rem;
-  }
-
-  .about__caption {
-    left: 1%;
-    bottom: 4px;
   }
 
   .about__text h2, .section-heading h2, .contact-intro h1 {
