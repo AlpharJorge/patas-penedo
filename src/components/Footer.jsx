@@ -14,7 +14,7 @@ function Footer({ contactPage = false }) {
       <div className="footer__inner">
         <div className="footer__brand"><span className="footer__logo"><PawPrint size={20} /></span><div><strong>Patas de Penedo</strong><span>Adoção responsável em Penedo, AL</span></div></div>
         <nav className="footer__nav" aria-label="Links do rodapé"><a href="#/sobre">Sobre</a><a href="#/adocao">Animais</a><a href="#/campanhas">Campanhas</a><a href="#/ajudar">Como ajudar</a></nav>
-        <a className="footer__social" href="https://www.instagram.com/patasdepenedo/" target="_blank" rel="noreferrer" aria-label="Instagram Patas de Penedo"><Camera size={19} /></a>
+        
         
       </div>
     </footer>

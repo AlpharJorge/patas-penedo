@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Check, Search, X } from "lucide-react";
 import AnimalCard from "./AnimalCard";
 import animalsData from "../data/animals";
-import { isDatabaseConfigured, loadAnimals, saveAdoptionRequest } from "../lib/dataStore";
+import { loadAnimals, saveAdoptionRequest } from "../lib/dataStore";
 
 const emptyForm = { name: "", email: "", phone: "", message: "" };
 
@@ -120,7 +120,7 @@ function AnimalCatalog({ preview = false }) {
           <label className="select-field"><span>Situação</span><select value={status} onChange={(event) => setStatus(event.target.value)}><option>Disponível</option><option>Todos</option><option>Em processo</option><option>Adotado</option></select></label>
         </div>
       )}
-      {dataWarning && isDatabaseConfigured() && <p className="data-notice" role="status">Não foi possível acessar o banco. Exibindo os animais de demonstração.</p>}
+      {dataWarning && <p className="data-notice" role="status">Não foi possível acessar o banco. Exibindo os animais de demonstração.</p>}
       {shownAnimals.length ? (
         <div className="catalog__grid">
           {shownAnimals.map((animal) => <AnimalCard key={animal.id} animal={animal} onAdopt={setSelectedAnimal} />)}

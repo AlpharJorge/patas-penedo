@@ -7,78 +7,100 @@ Site acadêmico de adoção responsável de animais, desenvolvido em React para 
 - Páginas de início, sobre, adoção, campanhas, como ajudar e contato.
 - Catálogo com busca por texto e filtros por espécie e situação.
 - Formulário para registrar interesse em conhecer um animal.
-- Links para campanhas solidárias.
-- Layout responsivo, ícones Lucide e mensagens condicionais conforme o resultado das ações.
-- Integração opcional com Supabase. Sem credenciais, o catálogo usa os dados de demonstração e os pedidos de interesse ficam no armazenamento local do navegador.
+- Links para campanhas solidárias e layout responsivo.
+- API em Node.js e Express, ligada a um banco MySQL local.
 
 ## Tecnologias
 
-- React 19, Vite e JavaScript.
-- CSS responsivo.
-- [Lucide React](https://lucide.dev/guide/packages/lucide-react) para ícones.
-- Supabase REST API para o banco de dados (opcional).
+- React, Vite e JavaScript no site.
+- Node.js, Express, CORS e `mysql2` no servidor (compatível com a autenticação padrão do MySQL 8.4).
+- MySQL 8 para armazenar animais e pedidos de adoção.
+- CSS responsivo e ícones Lucide React.
 
-## Executar localmente
+## Requisitos
 
-Requisitos: Node.js 20.19+ ou 22.12+.
+- Node.js 20.19+ ou 22.12+ e npm.
+- MySQL Server 8 em execução.
+- MySQL Workbench (opcional, para executar os arquivos SQL por uma interface gráfica).
 
-```bash
-git clone https://github.com/AlpharJorge/patas-penedo.git
-cd patas-penedo
-```
+## Preparar o banco
 
-Crie o arquivo local de configuração copiando o exemplo. No PowerShell:
+1. Abra o MySQL Workbench e conecte-se ao servidor local na porta `3306` com o usuário `root` e a senha criada na instalação.
+2. Abra e execute [`database/schema.sql`](database/schema.sql). Ele cria o banco `patas_penedo` e as tabelas `animals` e `adoption_requests`.
+3. Abra e execute [`database/seed.sql`](database/seed.sql) **uma única vez**. Ele cadastra os sete animais do catálogo atual. Se executar novamente, o MySQL avisará que os IDs já existem.
+4. Copie `server/.env.example` para `server/.env` e informe sua senha do MySQL em `MYSQL_PASSWORD`.
+
+No PowerShell, na pasta do projeto:
 
 ```powershell
-Copy-Item .env.example .env.local
+Copy-Item server/.env.example server/.env
 ```
 
-No macOS, Linux ou Git Bash:
+Abra `server/.env` no editor e substitua `coloque_sua_senha_aqui` pela senha que você definiu para o usuário MySQL. Não envie esse arquivo ao GitHub.
 
-```bash
-cp .env.example .env.local
+## Executar o site
+
+Clone o repositório e instale as dependências do site:
+
+```powershell
+git clone https://github.com/AlpharJorge/patas-penedo.git
+cd patas-penedo
+npm install
 ```
 
-O `.env.example` já contém a URL do projeto Supabase e a chave pública `sb_publishable_...` usada pelo site. Depois, instale as dependências e inicie o servidor:
+Use **dois terminais** dentro da pasta `patas-penedo`.
 
-```bash
+No primeiro terminal, inicie a API:
+
+```powershell
+cd server
 npm install
 npm run dev
 ```
 
-Abra o endereço indicado pelo Vite, normalmente `http://localhost:5173`.
+No segundo terminal, na pasta principal do projeto, inicie o site:
 
-Para gerar os arquivos de publicação:
+```powershell
+npm run dev
+```
 
-```bash
+Abra o endereço indicado pelo Vite, normalmente `http://localhost:5173`. Deixe os dois terminais e o serviço MySQL ativos enquanto usa o site.
+
+O Vite encaminha as chamadas `/api` para a API Express em `http://127.0.0.1:3001`. A API consulta e grava os dados no MySQL em `127.0.0.1:3306`. Se o banco ou a API estiverem indisponíveis, o catálogo mostra os dados de demonstração e o formulário avisa que o pedido ficou somente neste navegador.
+
+## Arquivos SQL e dados
+
+- `database/schema.sql`: cria o banco, a tabela de animais e a tabela de pedidos, com uma chave estrangeira entre elas.
+- `database/seed.sql`: cadastra os sete animais iniciais. Execute apenas uma vez em um banco recém-criado.
+- Pedidos feitos depois da migração são gravados localmente na tabela `adoption_requests`. Os pedidos antigos permanecem no projeto Supabase e não são copiados.
+
+## Publicação
+
+Para gerar os arquivos estáticos do site:
+
+```powershell
 npm run build
 ```
 
-## Configurar o banco de dados Supabase
-
-O repositório já está configurado para usar o projeto Supabase compartilhado do Patas de Penedo. Para rodar uma cópia local, basta criar o `.env.local` a partir do `.env.example`, como descrito acima; não é necessário criar outro projeto Supabase.
-
-Se quiser usar um projeto Supabase próprio:
-
-1. Crie o projeto no Supabase.
-2. No SQL Editor, execute [`supabase/schema.sql`](supabase/schema.sql).
-3. Substitua os valores de `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` no seu `.env.local` pela URL do novo projeto e pela chave publicável, que começa com `sb_publishable_`.
-4. Cadastre os animais na tabela `animals` pelo Table Editor.
-5. Reinicie o servidor Vite. O catálogo buscará os animais do banco e os formulários gravarão os pedidos em `adoption_requests`.
-
-A URL e a chave `sb_publishable_...` são configurações públicas do cliente e estão no `.env.example`. Não coloque no GitHub a senha do banco nem chaves `sb_secret_...` ou `service_role`. O esquema ativa RLS: permite leitura pública dos animais e envio de pedidos sem leitura pública desses pedidos. Em produção, configure limites contra spam e revise as políticas de acesso conforme a operação da ONG.
+O build do React sozinho não inclui a API nem o MySQL. Para outras pessoas acessarem o site publicado, também será necessário hospedar a API Node e um MySQL acessível por ela, além de configurar as variáveis de ambiente nesse servidor. Para apresentar no próprio computador, siga os passos locais acima.
 
 ## Estrutura
 
 ```text
+database/
+├── schema.sql       # Banco e tabelas MySQL
+└── seed.sql         # Animais iniciais
+server/
+├── index.js         # API Express e consultas MySQL
+├── .env.example     # Exemplo de configuração local
+└── package.json     # Dependências e comandos do servidor
 src/
-├── components/   # Navegação, páginas e componentes reutilizáveis
-├── data/         # Dados usados no modo de demonstração
-├── lib/          # Acesso ao Supabase e persistência local de contingência
-├── App.jsx       # Rotas por hash e composição das páginas
-└── App.css       # Estilos de componentes e responsividade
-supabase/
-└── schema.sql    # Tabelas e políticas de acesso do banco
+├── components/      # Navegação, páginas e componentes reutilizáveis
+├── data/            # Dados de demonstração
+├── lib/dataStore.js # Chamadas da interface para a API
+├── App.jsx          # Rotas por hash e composição das páginas
+└── App.css          # Estilos e responsividade
+vite.config.js       # Proxy local das chamadas /api
 ```
 
 ## Autoria
