@@ -8,7 +8,7 @@ const animals = [
     temperament: "Brincalhão e sociável com outros cães",
     status: "Disponível",
     story:
-      "Resgatado na vila matias após ficar preso em um terreno baldio. Hoje está saudável e adora correr no quintal.",
+      "Resgatado na vila após ficar preso em um terreno baldio. Hoje está saudável e adora correr no quintal.",
     photo: "https://i0.statig.com.br/bancodeimagens/2f/ym/i8/2fymi85z5vo5pcl5rsnsr3xgi.jpg",
   },
   {
